@@ -1,0 +1,27 @@
+﻿@model Theater_Drill_MVC.Models.ViewModels.MovieTheaterViewModel
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="movies-container">
+    @if (Model.Movies.Count != 0)
+    {
+        foreach (Movie movie in Model.Movies)
+        {
+            <div class="movie-container">
+                <a href="@("/movies/details/"+movie.ID)">
+                    <div>
+                        <img src="@movie.ImageUrl" alt="@movie.Title" max-width="200" , max-height="320" />
+                    </div>
+
+                    <div>
+                        <h4 class="text-center">@movie.Title</h4>
+                        <h5 class="text-center">@movie.LengthInMinutes min</h5>
+                    </div>
+                </a>
+            </div>
+
+        }
+    }
+</div>
+

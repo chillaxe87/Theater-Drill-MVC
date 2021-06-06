@@ -1,0 +1,28 @@
+﻿@model Movie
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="grid-container">
+    <div>
+        <h3 class="text-center"> @Model.Title</h3>
+        <img class="" src="@Model.ImageUrl" alt="@Model.Title" max-width="200" , max-height="320" />
+    </div>
+    <div>
+        <h4>Genre: </h4>
+        <p> @Model.Genre</p>
+        <h4>Director: </h4>
+        <p> @Model.Director</p>
+        <h4>Lead Actros:</h4>
+        <p> @Model.Cast</p>
+        <h4>Lenght in minutes: </h4>
+        <p> @Model.LengthInMinutes</p>
+        <h4>Description: </h4>
+        <p> @Model.Description</p>
+        <h4>Language: </h4>
+        <p> @Model.Language</p>
+        <h4>Ticket price: </h4>
+        <p> @Model.PricePerTicket</p>
+    </div>
+</div>
+
+

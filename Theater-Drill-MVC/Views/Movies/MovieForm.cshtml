@@ -1,0 +1,42 @@
+﻿@model Movie
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{ 
+    string title = Model.ID == 0 ? "New" : "Edit";
+    string buttonMsg = Model.ID == 0 ? "Add Movie" : "Edit Movie";
+} 
+<form asp-action="Save" method="post">
+    <h3 class="text-center">@title</h3>
+    <div class="form-group">
+        <label>Movie: </label><input asp-for="Title" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Genre: </label><input asp-for="Genre" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Director: </label><input asp-for="Director" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Stars: </label><input asp-for="Cast" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Description: </label><input asp-for="Description" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Language: </label><input asp-for="Language" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Movie length: </label><input asp-for="LengthInMinutes" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Ticket Price: </label><input asp-for="PricePerTicket" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Link to Image: </label><input asp-for="ImageUrl" class="form-control" />
+    </div>
+    <div class="text-center">
+        <input class="btn btn-primary" type="submit" value="@buttonMsg" />
+    </div>
+</form>
