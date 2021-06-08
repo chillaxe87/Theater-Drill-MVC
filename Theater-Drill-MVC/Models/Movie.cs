@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,6 +25,7 @@ namespace Theater_Drill_MVC.Models
 
         public string Description { get; set; }
         [Required(ErrorMessage = "Please enter the ticket price")]
+        [Column(TypeName = "decimal(18,2)")]
         [Range(1, 500)]
         public decimal PricePerTicket { get; set; }
         [Url]

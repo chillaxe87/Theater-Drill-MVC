@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,14 +20,9 @@ namespace Theater_Drill_MVC.Controllers
         }
         public IActionResult Index()
         {
-            var auditoriums = _context.Auditoriums.ToList();
             var movies = _context.Movies.ToList();
-            if (auditoriums == null)
-                return Content("Error Loading this Page");
+            var auditoriums = _context.Auditoriums.ToList();
             var viewModel = new MovieTheaterViewModel(movies, auditoriums);
-
-            int count = viewModel.Movies.Count;
-
             return View(viewModel);
         }
         public IActionResult Details(int id)
@@ -56,7 +52,7 @@ namespace Theater_Drill_MVC.Controllers
             else
             {
                 var movieInDb = _context.Movies.SingleOrDefault(m => m.ID == movie.ID);
-                movieInDb = movie;
+                _context.Entry(movieInDb).CurrentValues.SetValues(movie);
             }
             _context.SaveChanges();
             return RedirectToAction("", "Movies");

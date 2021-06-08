@@ -78,9 +78,12 @@ body {
     grid-gap:10px;
 }
 .movie-container{
-    width: 200px;
-    height: 350px;
+    max-width: 250px;
+    max-height: 350px;
 }
 .movie-container img {
     max-width: 100%;
+}
+.movie-details-container {
+    display: grid;
 }

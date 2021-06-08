@@ -24,15 +24,7 @@ namespace Theater_Drill_MVC.Controllers
 
         public IActionResult Index()
         {
-            var auditoriums = _context.Auditoriums.ToList();
-            var movies = _context.Movies.ToList();
-            if (auditoriums == null)
-                return Content("Error Loading this Page");
-            var viewModel = new MovieTheaterViewModel(movies, auditoriums);
-
-            int count = viewModel.Movies.Count;
-
-            return View(viewModel);
+            return RedirectToAction("", "Movies");
         }
 
         public IActionResult Privacy()

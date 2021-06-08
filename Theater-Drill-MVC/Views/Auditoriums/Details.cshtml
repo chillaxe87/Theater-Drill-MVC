@@ -1,0 +1,37 @@
+﻿@model Theater_Drill_MVC.Models.ViewModels.AuditoriumViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h4 class="text-center">@Model.Auditorium.Name</h4>
+<br />
+<h6 class="text-center">Has @Model.Auditorium.Rows rows and @Model.Auditorium.SeatNumberInRow seats per row</h6>
+<a href="@("/auditoriums/edit/"+Model.Auditorium.ID)">Edit Auditorium</a>
+<br />
+<br />
+<h5>Movie Schedule for @Model.Auditorium.Name:</h5>
+<br />
+
+@if (Model.Schedule.Count == 0)
+{
+    <h5>There are no scheduled movies for this room</h5>
+}
+else
+{
+    <table class="table">
+        <tr class="table-info">
+            <th>Movie</th>
+            <th>Screening Time</th>
+        </tr>
+
+        @foreach (var item in Model.Schedule)
+        {
+
+            <tr class="table-light">
+                <td>@item.Movie.Title</td>
+                <td>@item.ScreeningTime.ToLongDateString()</td>
+            </tr>
+        }
+    </table>
+}
+
+

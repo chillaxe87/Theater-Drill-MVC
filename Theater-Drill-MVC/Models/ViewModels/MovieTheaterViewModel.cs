@@ -10,10 +10,10 @@ namespace Theater_Drill_MVC.Models.ViewModels
         public List<Movie> Movies;
         public List<Auditorium> Auditoriums;
 
-        public MovieTheaterViewModel(List<Movie> movies, List<Auditorium> auditorium)
+        public MovieTheaterViewModel(List<Movie> movies, List<Auditorium> auditoriums)
         {
             Movies = movies;
-            Auditoriums = auditorium;
+            Auditoriums = auditoriums;
         }
     }
 }

@@ -1,0 +1,18 @@
+﻿@model Theater_Drill_MVC.Models.ViewModels.AuditoriumScheduleViewModel
+@*
+    ViewData["Title"] = "Home Page";
+*@
+
+<div>
+    <h4 class="text-center m-3">Auditoriums</h4>
+    @foreach (Auditorium room in Model.Auditorium)
+    {
+        <a href="@("/auditoriums/details/"+room.ID)">
+
+            <div>
+                <h5 class="text-center m-1">@room.Name</h5>
+            </div>
+        </a>
+    }
+</div>
+

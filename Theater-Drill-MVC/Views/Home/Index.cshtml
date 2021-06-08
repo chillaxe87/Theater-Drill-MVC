@@ -8,7 +8,7 @@
     {
         foreach (Movie movie in Model.Movies)
         {
-            <div class="movie-container">
+            <div class="movie-container text-white">
                 <a href="@("/movies/details/"+movie.ID)">
                     <div>
                         <img src="@movie.ImageUrl" alt="@movie.Title" max-width="200" , max-height="320" />
@@ -16,11 +16,10 @@
 
                     <div>
                         <h4 class="text-center">@movie.Title</h4>
-                        <h5 class="text-center">@movie.LengthInMinutes min</h5>
+                        <h6 class="text-center">@movie.LengthInMinutes min</h6>
                     </div>
                 </a>
             </div>
-
         }
     }
 </div>

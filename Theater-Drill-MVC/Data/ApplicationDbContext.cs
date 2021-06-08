@@ -12,6 +12,7 @@ namespace Theater_Drill_MVC.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options){ }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Auditorium> Auditoriums { get; set; }
+        public DbSet<ScheduledMovie> Schedule { get; set; }
     }
 }
 

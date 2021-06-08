@@ -1,0 +1,38 @@
+﻿@model Theater_Drill_MVC.Models.ViewModels.ScheduleMovieViewModel
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    string title = Model.Schedule == null ? "New" : "Edit";
+    string buttonMsg = Model.Schedule == null ? "Schedule Movie" : "Edit Schedule";
+    List<Movie> movies = Model.Movies;
+    List<Auditorium> auditoriums = Model.Auditorium;
+}
+<form asp-action="Save" method="post">
+    <h3 class="text-center">@title</h3>
+    <div class="form-group m-3">
+        <label>Movie: </label><br />
+        @foreach (var movie in movies)
+        {
+            @Html.RadioButtonFor(m => m.Schedule.MovieID, movie.ID)
+            <label class="m-1" for=@movie>@movie.Title</label>
+        }
+
+    </div>
+    <div class="form-group m-3">
+        <label>Auditorium: </label><br />
+        @foreach (var auditorium in auditoriums)
+        { 
+            @Html.RadioButtonFor(m => m.Schedule.AuditoriumId, auditorium.ID)
+            <label class="m-1" for=@auditorium>@auditorium.Name</label>
+        }
+    </div>
+    <div class="form-group m-3">
+        <label>Screening Time: </label><input asp-for="Schedule.ScreeningTime" class="form-control" />
+    </div>
+    <div class="text-center m-3">
+        <input class="btn btn-primary m-4" type="submit" value="@buttonMsg" />
+    </div>
+    @Html.HiddenFor(m => Model.Schedule.ID)
+</form>

@@ -2,27 +2,25 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="grid-container">
-    <div>
-        <h3 class="text-center"> @Model.Title</h3>
-        <img class="" src="@Model.ImageUrl" alt="@Model.Title" max-width="200" , max-height="320" />
+<div class="container">
+    <div class="row">
+        <div class="movie-container col-5 ml-5">
+            <h3 class="text-center"> @Model.Title</h3>
+            <img src="@Model.ImageUrl" alt="@Model.Title" />
+            <h6 class="text-center">@Model.Genre</h6>
+        </div>
+        <div class="col-7 mt-5">
+            <h6 class="p-1 mt-5">Directed by: @Model.Director</h6>
+            <h5 class="p-1">Lead Actors: </h5>
+            <p class="p-2">@Model.Cast</p>
+            <p class="p-1">Language: @Model.Language</p>
+            <p class="p-1">@Model.LengthInMinutes minutes long</p>
+
+        </div>
     </div>
-    <div>
-        <h4>Genre: </h4>
-        <p> @Model.Genre</p>
-        <h4>Director: </h4>
-        <p> @Model.Director</p>
-        <h4>Lead Actros:</h4>
-        <p> @Model.Cast</p>
-        <h4>Lenght in minutes: </h4>
-        <p> @Model.LengthInMinutes</p>
-        <h4>Description: </h4>
-        <p> @Model.Description</p>
-        <h4>Language: </h4>
-        <p> @Model.Language</p>
-        <h4>Ticket price: </h4>
-        <p> @Model.PricePerTicket</p>
-    </div>
+    <p class="p-2 mt-3"> @Model.Description</p>
+    <h6 class="p-1">Ticket price: @Model.PricePerTicket</h6>
+
 </div>
 
 

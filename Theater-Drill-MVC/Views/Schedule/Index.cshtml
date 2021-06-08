@@ -1,0 +1,29 @@
+﻿@model Theater_Drill_MVC.Models.ViewModels.ScheduleViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+<a class="btn btn-primary" href="/schedule/new">Schedule New Movie</a>
+<br />
+<br />
+<h5 class="text-center">List of all Scheduled Movies:</h5>
+<br />
+<table class="table">
+    <tr class="table-info">
+        <th>Movie</th>
+        <th>Auditorium</th>
+        <th>Screening Time</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.schedules)
+    {
+
+        <tr class="table-light">
+            <td>@item.Movie.Title</td>
+            <td>@item.Auditorium.Name</td>
+            <td>@item.ScreeningTime.ToLongDateString()</td>
+            <td> <a href="@("/schedule/edit/"+item.ID)">Edit</a></td>
+        </tr>
+    }
+</table>
+
