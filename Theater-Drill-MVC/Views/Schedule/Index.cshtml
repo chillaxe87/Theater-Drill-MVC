@@ -2,7 +2,6 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<a class="btn btn-primary" href="/schedule/new">Schedule New Movie</a>
 <br />
 <br />
 <h5 class="text-center">List of all Scheduled Movies:</h5>
@@ -21,8 +20,8 @@
         <tr class="table-light">
             <td>@item.Movie.Title</td>
             <td>@item.Auditorium.Name</td>
-            <td>@item.ScreeningTime.ToLongDateString()</td>
-            <td> <a href="@("/schedule/edit/"+item.ID)">Edit</a></td>
+            <td>@item.ScreeningTime.ToString("g")</td>
+            <td> <a href="">Order Tickets!</a></td>
         </tr>
     }
 </table>

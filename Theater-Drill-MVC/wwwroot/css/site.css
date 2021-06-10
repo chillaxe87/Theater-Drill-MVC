@@ -74,11 +74,11 @@ body {
 /*--------------------------------------------------*/
 .movies-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-gap:10px;
 }
 .movie-container{
-    max-width: 250px;
+    width: 200px;
     max-height: 350px;
 }
 .movie-container img {
@@ -86,4 +86,10 @@ body {
 }
 .movie-details-container {
     display: grid;
+}
+.auditoriums-container{
+    display: inline-flex;
+    width:100%;
+    justify-content: space-around
+
 }

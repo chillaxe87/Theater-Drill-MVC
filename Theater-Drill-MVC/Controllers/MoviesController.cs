@@ -10,14 +10,17 @@ using Theater_Drill_MVC.Models.ViewModels;
 
 namespace Theater_Drill_MVC.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class MoviesController : Controller
     {
         private ApplicationDbContext _context;
+        private string adminRole = Roles.role;
 
         public MoviesController(ApplicationDbContext context)
         {
             _context = context;
         }
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var movies = _context.Movies.ToList();
@@ -25,11 +28,14 @@ namespace Theater_Drill_MVC.Controllers
             var viewModel = new MovieTheaterViewModel(movies, auditoriums);
             return View(viewModel);
         }
+        [AllowAnonymous]
         public IActionResult Details(int id)
-        {
+        {           
             var movie = _context.Movies.SingleOrDefault(m => m.ID == id);
             if (movie == null)
                 return View("", "Index");
+            if (User.IsInRole(adminRole))
+                return View("AdminDetails", movie);
 
             return View(movie);
         }

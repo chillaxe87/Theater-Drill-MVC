@@ -290,10 +290,10 @@ namespace Theater_Drill_MVC.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AuditoriumID")
+                    b.Property<int>("AuditoriumId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MovieID")
+                    b.Property<int>("MovieID")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("ScreeningTime")
@@ -301,11 +301,45 @@ namespace Theater_Drill_MVC.Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("AuditoriumID");
+                    b.HasIndex("AuditoriumId");
 
                     b.HasIndex("MovieID");
 
                     b.ToTable("Schedule");
+                });
+
+            modelBuilder.Entity("Theater_Drill_MVC.Models.Ticket", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AuditoriumId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("OwnerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SeatNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SeatRow")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Time")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("AuditoriumId");
+
+                    b.HasIndex("MovieId");
+
+                    b.ToTable("Tickets");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -363,11 +397,34 @@ namespace Theater_Drill_MVC.Data.Migrations
                 {
                     b.HasOne("Theater_Drill_MVC.Models.Auditorium", "Auditorium")
                         .WithMany()
-                        .HasForeignKey("AuditoriumID");
+                        .HasForeignKey("AuditoriumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Theater_Drill_MVC.Models.Movie", "Movie")
                         .WithMany()
-                        .HasForeignKey("MovieID");
+                        .HasForeignKey("MovieID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Auditorium");
+
+                    b.Navigation("Movie");
+                });
+
+            modelBuilder.Entity("Theater_Drill_MVC.Models.Ticket", b =>
+                {
+                    b.HasOne("Theater_Drill_MVC.Models.Auditorium", "Auditorium")
+                        .WithMany()
+                        .HasForeignKey("AuditoriumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Theater_Drill_MVC.Models.Movie", "Movie")
+                        .WithMany()
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Auditorium");
 

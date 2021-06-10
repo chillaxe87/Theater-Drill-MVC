@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,20 +10,23 @@ using Theater_Drill_MVC.Models.ViewModels;
 
 namespace Theater_Drill_MVC.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class AuditoriumsController : Controller
     {
         private ApplicationDbContext _context;
-
+        private string adminRole = Roles.role;
         public AuditoriumsController(ApplicationDbContext context)
         {
             _context = context;
         }
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var auditoriums = _context.Auditoriums.ToList();
             var viewModel = new AuditoriumScheduleViewModel(auditoriums, null);
             return View(viewModel);
         }
+        [AllowAnonymous]
         public IActionResult Details(int id)
         {
             var auditorium = _context.Auditoriums.SingleOrDefault(a => a.ID == id);
@@ -37,6 +41,8 @@ namespace Theater_Drill_MVC.Controllers
             if (auditorium == null)
                 return View("", "Index");
 
+            if (User.IsInRole(adminRole))
+                return View("AdminDetails", viewModel);
 
             return View(viewModel);
         }

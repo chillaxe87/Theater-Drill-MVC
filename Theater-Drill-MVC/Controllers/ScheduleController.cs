@@ -12,19 +12,25 @@ namespace Theater_Drill_MVC.Controllers
     public class ScheduleController : Controller
     {
         private ApplicationDbContext _context;
-
+        private string adminRole = "Administrator";
         public ScheduleController(ApplicationDbContext context)
         {
             _context = context;
         }
         public IActionResult Index()
         {
-            ScheduleViewModel viewModel = new ScheduleViewModel(_context.Schedule.ToList());
+            ScheduleViewModel viewModel;
+
+            viewModel = new ScheduleViewModel(_context.Schedule.ToList());
+
+
             foreach(ScheduledMovie item in viewModel.schedules)
             {
                 item.Movie = _context.Movies.SingleOrDefault(m => m.ID == item.MovieID);
                 item.Auditorium = _context.Auditoriums.SingleOrDefault(a => a.ID == item.AuditoriumId);
             }
+            if (User.IsInRole(adminRole))
+                return View("AdminDetails", viewModel);
             return View(viewModel);
         }
         public IActionResult Edit(int id)
@@ -62,6 +68,21 @@ namespace Theater_Drill_MVC.Controllers
             }
             _context.SaveChanges();
             return RedirectToAction("", "Movies");
+        }
+        public IActionResult Delete(int id)
+        {
+            var scheduleInDB = _context.Schedule.SingleOrDefault(s => s.ID == id);
+            if (scheduleInDB == null)
+                return NotFound();
+
+            _context.Remove(scheduleInDB);
+            _context.SaveChanges();
+
+            return RedirectToAction("", "Movies");
+        }
+        public IActionResult OrderTicket()
+        {
+            return View();
         }
     }
 }

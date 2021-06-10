@@ -1,0 +1,25 @@
+﻿@model Movie
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="movie-container col-5 ml-5">
+            <h3 class="text-center"> @Model.Title</h3>
+            <img src="@Model.ImageUrl" alt="@Model.Title" />
+            <h6 class="text-center">@Model.Genre</h6>
+        </div>
+        <div class="col-7 mt-5">
+            <h6 class="p-1 mt-5">Directed by: @Model.Director</h6>
+            <h5 class="p-1">Lead Actors: </h5>
+            <p class="p-2">@Model.Cast</p>
+            <p class="p-1">Language: @Model.Language</p>
+            <p class="p-1">@Model.LengthInMinutes minutes long</p>
+        </div>
+    </div>
+    <p class="p-2 mt-3"> @Model.Description</p>
+    <h6 class="p-1">Ticket price: @Model.PricePerTicket</h6>
+</div>
+
+<a href="@("/movies/edit/"+Model.ID)" class="btn btn-primary">Edit Movie</a>
+<a href="/movies/new" class="btn btn-primary">Add Movie</a>

@@ -10,33 +10,35 @@
             <div class="movie-container">
                 <a href="@("/movies/details/"+movie.ID)">
                     <div>
-                        <img src="@movie.ImageUrl" alt="@movie.Title" max-width="200" , max-height="320" />
+                        <img src="@movie.ImageUrl" alt="@movie.Title" width="200" , height="280" />
                     </div>
 
                     <div>
                         <h4 class="text-center">@movie.Title</h4>
-                        <h6 class="text-center">@movie.LengthInMinutes min</h6>
+                        <h6 class="text-center">@movie.Genre </h6>
                     </div>
                 </a>
             </div>
         }
     }
 </div>
-<div>
-    @if (Model.Auditoriums.Count != 0)
-    {
-        foreach (Auditorium item in Model.Auditoriums)
+@*
+    <div>
+        @if (Model.Auditoriums.Count != 0)
         {
-            <div>
-                <a href="@("/auditoriums/details/"+item.ID)">
-                    <div>
-                        <h4 class="text-center">@item.Name</h4>
+            foreach (Auditorium item in Model.Auditoriums)
+            {
+                <div>
+                    <a href="@("/auditoriums/details/"+item.ID)">
+                        <div>
+                            <h4 class="text-center">@item.Name</h4>
 
-                    </div>
-                </a>
-            </div>
+                        </div>
+                    </a>
+                </div>
+            }
         }
-    }
-</div>
+    </div>
+*@
 
 

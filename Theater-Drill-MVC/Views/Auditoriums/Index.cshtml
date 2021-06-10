@@ -4,15 +4,17 @@
 *@
 
 <div>
-    <h4 class="text-center m-3">Auditoriums</h4>
-    @foreach (Auditorium room in Model.Auditorium)
-    {
-        <a href="@("/auditoriums/details/"+room.ID)">
+    <h4 class="text-center mt-5 mb-5">Auditoriums:</h4>
+    <div class="auditoriums-container">
+        @foreach (Auditorium room in Model.Auditorium)
+        {
+            <a href="@("/auditoriums/details/"+room.ID)">
 
-            <div>
-                <h5 class="text-center m-1">@room.Name</h5>
-            </div>
-        </a>
-    }
+                <div>
+                    <h5 class="text-center m-1">@room.Name</h5>
+                </div>
+            </a>
+        }
+    </div>
 </div>
 

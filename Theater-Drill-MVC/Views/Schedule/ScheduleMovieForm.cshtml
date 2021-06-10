@@ -13,20 +13,11 @@
     <h3 class="text-center">@title</h3>
     <div class="form-group m-3">
         <label>Movie: </label><br />
-        @foreach (var movie in movies)
-        {
-            @Html.RadioButtonFor(m => m.Schedule.MovieID, movie.ID)
-            <label class="m-1" for=@movie>@movie.Title</label>
-        }
-
+        <select asp-for="Schedule.MovieID" class="form-control" asp-items='new SelectList(movies, "ID","Title")'></select>
     </div>
     <div class="form-group m-3">
         <label>Auditorium: </label><br />
-        @foreach (var auditorium in auditoriums)
-        { 
-            @Html.RadioButtonFor(m => m.Schedule.AuditoriumId, auditorium.ID)
-            <label class="m-1" for=@auditorium>@auditorium.Name</label>
-        }
+        <select asp-for="Schedule.AuditoriumId" class="form-control" asp-items='new SelectList(auditoriums, "ID","Name")'></select>
     </div>
     <div class="form-group m-3">
         <label>Screening Time: </label><input asp-for="Schedule.ScreeningTime" class="form-control" />

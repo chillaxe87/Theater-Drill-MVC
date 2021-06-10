@@ -7,6 +7,8 @@ namespace Theater_Drill_MVC.Models
 {
     public class UserRole
     {
-        public string Role { get; set; }
+        public int Id { get; set; }
+        public string RoleName { get; set; }
+        public static string Role = "Administrator";
     }
 }
