@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Theater_Drill_MVC.Models
 {
-    public class ScheduledMovie
+    public class ScheduledMovie  
     {
         public int ID { get; set; }
         public Movie Movie { get; set; }

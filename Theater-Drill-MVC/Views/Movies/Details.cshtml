@@ -18,7 +18,8 @@
         </div>
     </div>
     <p class="p-2 mt-3"> @Model.Description</p>
-    <h6 class="p-1">Ticket price: @Model.PricePerTicket</h6>
+    <h6 class="p-1">Ticket price: @Model.PricePerTicket NIS</h6>
+    <a class="btn btn-primary" href="@("/schedule/index/"+Model.ID)">Order Tickets</a>
 </div>
 
 

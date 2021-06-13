@@ -16,7 +16,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Theater_Drill_MVC.Areas.Identity.Pages.Account
 {
-    [AllowAnonymous]
+    [Authorize(Roles = "Administrator")]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;

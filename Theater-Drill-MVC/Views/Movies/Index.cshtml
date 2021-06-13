@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+<div class="m-5"><a href="/movies/new" class="btn btn-primary">Add Movie</a></div>
 <div class="movies-container">
     @if (Model.Movies.Count != 0)
     {
@@ -22,6 +23,7 @@
         }
     }
 </div>
+
 @*
     <div>
         @if (Model.Auditoriums.Count != 0)

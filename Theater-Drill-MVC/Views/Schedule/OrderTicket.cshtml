@@ -1,4 +1,122 @@
-﻿@model Theater_Drill_MVC.Models.ViewModels.ScheduleViewModel
+﻿@model Theater_Drill_MVC.Models.ViewModels.TicketViewModel
 @{
     ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@{
+    var movie = Model.Ticket.Movie;
+    var auditorium = Model.Ticket.Auditorium;
+    var screeningTimes = Model.ScreeningTimes;
+    var screeningTime = Model.ScreeningTime;
+    var seatsTake = Model.SeatsTaken;
+    Model.Ticket.Time = screeningTime.ScreeningTime;
+    List<string> seats = new List<string>();
+    foreach (var seat in seatsTake)
+    {
+        seats.Add(seat.SeatRow + "/" + seat.SeatNumber);
+    }
+
+}
+
+<form id="main-form" asp-action="SaveTicket" method="post">
+    <h3 class="text-center">@movie.Title</h3>
+    <div class="form-group m-3">
+        <label>Auditorium: @auditorium.Name</label><br />
+    </div>
+    <div class="form-group m-3">
+        <label>Screening Time: @screeningTime.ScreeningTime</label>
+    </div>
+    <div class="form-group m-3">
+        @Html.LabelFor(n => n.Ticket.OwnerName)<br />
+        @Html.TextBoxFor(n => n.Ticket.OwnerName)
+        @Html.ValidationMessageFor(m => m.Ticket.OwnerName)
+    </div>
+    <div class="form-group m-3">
+        @Html.LabelFor(n => n.Ticket.OwnerEmail)<br />
+        @Html.TextBoxFor(n => n.Ticket.OwnerEmail)
+        @Html.ValidationMessageFor(m => m.Ticket.OwnerEmail)
+    </div>
+    <div class="form-group m-3">
+        <label>Choose Seats: </label><br />
+        <span class="screen"></span>
+        @for (int i = 1; i <= auditorium.Rows; i++)
+        {
+            <div class="row-container">
+                @for (int y = 1; y <= auditorium.SeatNumberInRow; y++)
+                {
+                    if (seats.Contains(i + "/" + y))
+                    {
+                        <span class="square red" , id="@i/@y"></span>
+                    }
+                    else
+                    {
+                        <span class="square blue" , id="@i/@y" onclick="markSeat(@i, @y)"></span>
+                    }
+
+                }
+
+            </div>
+        }
+        @* <input class="seatsOrdered" id="seatsOrdered" type="text" asp-for="Ticket.SeatsOrdered" asp />*@
+        <input type="hidden" class="seatsOrdered" id="seatsOrdered" asp-for="Ticket.SeatsOrdered" asp />
+    </div>
+    <div>
+        <h3 class="text-center">Seats Chosen:</h3>
+        <h4 class="text-center" id="ticketsChosen">Total Tickets</h4>
+        <h4 class="text-center" id="totalPrice">Total Price: 0</h4>
+    </div>
+    <div class="text-center m-3">
+        <input class="btn btn-primary m-4" type="submit" value="Order" />
+    </div>
+    @Html.HiddenFor(m => Model.Ticket.ID)
+    @Html.HiddenFor(m => Model.Ticket.MovieId)
+    @Html.HiddenFor(m => Model.Ticket.AuditoriumId)
+    @Html.HiddenFor(m => Model.Ticket.Time)
+
+</form>
+
+@section scripts
+{
+    <script type="text/javascript">
+        var seat = document.getElementById("ticketsChosen");
+        var price = document.getElementById("totalPrice");
+        var seatsOrdered = document.getElementById("seatsOrdered");
+        var isCheckedSeat = [];
+        var result;
+        var howManySeatsMarked = 0;
+
+        function markSeat(row, column) {
+            var id = row + "/" + column;
+            if (isCheckedSeat.includes(id)) {
+                unMarkSeat(id)
+                howManySeatsMarked--;
+            }
+            else {
+                isCheckedSeat.push(id);
+                seat.innerHTML = seatsOrdered;
+                document.getElementById(id).classList.remove('blue');
+                document.getElementById(id).classList.add('green');
+                howManySeatsMarked++
+            }
+            textMsg();
+
+        }
+        function unMarkSeat(id) {
+            isCheckedSeat = isCheckedSeat.filter(a => a != id)
+            document.getElementById(id).classList.remove('green');
+            document.getElementById(id).classList.add('blue');
+
+        }
+        function textMsg() {
+            result = "";
+            isCheckedSeat.forEach(el => result += el + " ");
+            seat.innerHTML = result;
+            seatsOrdered.value = result;
+            var totalPrice = howManySeatsMarked * '@Model.Ticket.Movie.PricePerTicket';
+            price.innerHTML = "Total Price " + totalPrice + " ILS";
+        }
+        $('main-form').add(result);
+    </script>
+}
+
+

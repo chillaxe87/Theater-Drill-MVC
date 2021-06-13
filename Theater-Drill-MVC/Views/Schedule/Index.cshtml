@@ -21,7 +21,7 @@
             <td>@item.Movie.Title</td>
             <td>@item.Auditorium.Name</td>
             <td>@item.ScreeningTime.ToString("g")</td>
-            <td> <a href="">Order Tickets!</a></td>
+            <td> <a href="@("/schedule/orderticket/"+item.ID)">Order Tickets!</a></td>
         </tr>
     }
 </table>

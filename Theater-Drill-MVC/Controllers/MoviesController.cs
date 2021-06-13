@@ -63,5 +63,16 @@ namespace Theater_Drill_MVC.Controllers
             _context.SaveChanges();
             return RedirectToAction("", "Movies");
         }
+        public IActionResult Delete(int id)
+        {
+            var movieInDB = _context.Movies.SingleOrDefault(s => s.ID == id);
+            if (movieInDB == null)
+                return NotFound();
+
+            _context.Remove(movieInDB);
+            _context.SaveChanges();
+
+            return RedirectToAction("", "Movies");
+        }
     }
 }

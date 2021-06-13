@@ -1,0 +1,36 @@
+﻿@model Theater_Drill_MVC.Models.ViewModels.OrderdetailsViewModel
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    var tickets = Model.Tickets;
+}
+<h3 class="text-center m-4">Order Completed</h3>
+<div>
+    <label>Ordered by: @Model.Tickets[0].OwnerName</label><br />
+    <label>Receiept sent to: @Model.Tickets[0].OwnerEmail E-Mail</label><br />
+    <label>Movie: @Model.Movie.Title</label><br />
+    <label>Auditorium: @Model.Auditorium.Name</label><br />
+    <label>Screening Time: @Model.Tickets[0].Time</label><br />
+    <label>Total Price: @(Model.Tickets.Count*Model.Movie.PricePerTicket) NIS</label>
+
+</div>
+<label class="text-center m-3">Seats Ordered</label>
+<table class="table">
+    <tr class="table-info">
+        <th>Ticket</th>
+        <th>Row</th>
+        <th>Seat Number</th>
+    </tr>
+    @for (int i = 0; i < tickets.Count; i++)
+    {
+        <tr class="table-light">
+            <td>@(i + 1)</td>
+            <td>@tickets[i].SeatRow</td>
+            <td>@tickets[i].SeatNumber</td>
+        </tr>
+    }
+</table>
+<a class="btn btn-primary" href="@("/movies")"> Back to main page</a>
+
